@@ -18,3 +18,8 @@ jobs:
           repository: contoso-website
           tags: latest
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_push_image # Will wait for the execution of the previous job
+    steps:
+      - uses: actions/checkout@v2
