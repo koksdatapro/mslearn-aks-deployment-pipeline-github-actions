@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-name: Build and push the tagged build to production
-=======
+
 name: Build and push the latest build to production
->>>>>>> 39a9e1ef3ad336e1aae29b6396b13234caad1d57
+
 
 on:
   push:
@@ -11,16 +9,12 @@ on:
 
 jobs:
   build_push_image:
-<<<<<<< HEAD
-    runs-on: ubuntu-latest
-=======
-    runs-on: ubuntu-20.04
->>>>>>> 39a9e1ef3ad336e1aae29b6396b13234caad1d57
 
-    steps:
+      runs-on: ubuntu-20.04
+      steps:
       - uses: actions/checkout@v2
 
-<<<<<<< HEAD
+
       - name: Build and Push production image
         # You can pin to the exact commit or the version.
         # uses: docker/build-push-action@ab83648e2e224cfeeab899e23b639660765c3a89
@@ -66,7 +60,7 @@ jobs:
             --set image.repository=${{ secrets.ACR_NAME }} \
             --set dns.name=${{ secrets.DNS_NAME }} \
             --set image.tag=${GITHUB_REF##*/}
-=======
+
       - name: Fetch latest version
         id: fetch_version
         run: echo ::set-output name=TAG::${GITHUB_REF#refs/tags/}
@@ -84,4 +78,4 @@ jobs:
           context: .
           tags: ${{secrets.ACR_NAME}}/contoso-website:latest,${{secrets.ACR_NAME}}/contoso-website:${{ steps.fetch_version.outputs.TAG }}
           push: true
->>>>>>> 39a9e1ef3ad336e1aae29b6396b13234caad1d57
+
