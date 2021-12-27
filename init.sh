@@ -1,23 +1,13 @@
 #!/bin/bash
 
 echo "Defining variables..."
-export RESOURCE_GROUP_NAME=mslearn-gh-pipelines-$RANDOM
-export AKS_NAME=contoso-video
-export ACR_NAME=ContosoContainerRegistry$RANDOM
+export RESOURCE_GROUP_NAME=rg-contoso-video
+export AKS_NAME=aks-contoso-video
+export ACR_NAME=acrkk
 
 echo "Searching for resource group..."
-az group create -n $RESOURCE_GROUP_NAME -l eastus
+az group create -n $RESOURCE_GROUP_NAME -l australiaeast
 
-echo "Creating cluster..."
-az aks create \
-  --resource-group $RESOURCE_GROUP_NAME \
-  --name $AKS_NAME \
-  --node-count 1 \
-  --enable-addons http_application_routing \
-  --dns-name-prefix $AKS_NAME \
-  --enable-managed-identity \
-  --generate-ssh-keys \
-  --node-vm-size Standard_B2s
 
 echo "Obtaining credentials..."
 az aks get-credentials -n $AKS_NAME -g $RESOURCE_GROUP_NAME
@@ -44,5 +34,5 @@ echo "-> Resource Group Name: $RESOURCE_GROUP_NAME"
 echo "-> ACR Name: $ACR_NAME"
 echo "-> ACR Login Username: $ACR_USERNAME"
 echo "-> ACR Password: $ACR_PASSWORD"
-echo "-> AKS Cluster Name: $ACR_NAME"
+echo "-> AKS Cluster Name: $AKS_NAME"
 echo "-> AKS DNS Zone Name: $DNS_NAME"
